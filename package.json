@@ -1,0 +1,23 @@
+{
+  "name": "meroprofile",
+  "version": "1.0.0",
+  "description": "Business & Professional Directory Platform for Nepal",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000"
+  },
+  "keywords": [
+    "business-directory",
+    "nepal",
+    "professional-directory",
+    "local-business",
+    "supabase"
+  ],
+  "author": "MeroProfile Team",
+  "license": "PROPRIETARY",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meroprofilecotest/meroprofile.git"
+  }
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile - MeroProfile</title>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/create-profile.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>Create Your Profile</h1>
+                <p class="text-secondary">Choose the type of profile you want to create</p>
+            </div>
+            
+            <!-- Profile Type Selection -->
+            <div class="profile-type-selection" id="profile-type-selection">
+                <div class="type-card" onclick="selectProfileType('business')">
+                    <div class="type-icon">🏢</div>
+                    <h3>Business Profile</h3>
+                    <p>For restaurants, shops, hotels, and other businesses</p>
+                    <ul class="type-features">
+                        <li>✓ Banner & Logo</li>
+                        <li>✓ Gallery</li>
+                        <li>✓ Services & Pricing</li>
+                        <li>✓ Location & Map</li>
+                        <li>✓ Reviews</li>
+                    </ul>
+                    <button class="btn btn-primary">Create Business Profile</button>
+                </div>
+                
+                <div class="type-card" onclick="selectProfileType('professional')">
+                    <div class="type-icon">👨‍⚕️</div>
+                    <h3>Professional Profile</h3>
+                    <p>For doctors, consultants, and service providers</p>
+                    <ul class="type-features">
+                        <li>✓ Professional Photo</li>
+                        <li>✓ Qualifications</li>
+                        <li>✓ Services & Fees</li>
+                        <li>✓ Clinic/Office Details</li>
+                        <li>✓ Reviews</li>
+                    </ul>
+                    <button class="btn btn-primary">Create Professional Profile</button>
+                </div>
+            </div>
+            
+            <!-- Business Profile Form -->
+            <div class="profile-form-container hidden" id="business-form-container">
+                <div class="form-header">
+                    <button class="btn btn-outline btn-sm" onclick="backToSelection()">← Back</button>
+                    <h2>Create Business Profile</h2>
+                </div>
+                
+                <form id="business-form" onsubmit="handleBusinessSubmit(event)">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Business Name *</label>
+                            <input type="text" class="form-control" id="business-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Category *</label>
+                            <select class="form-control" id="business-category" required>
+                                <option value="">Select Category</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description *</label>
+                            <textarea class="form-control" id="business-description" rows="4" required></textarea>
+                            <small class="text-secondary">Tell customers about your business</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Price Range</label>
+                            <select class="form-control" id="business-price-range">
+                                <option value="">Select Price Range</option>
+                                <option value="Budget (Rs 0-500)">Budget (Rs 0-500)</option>
+                                <option value="Moderate (Rs 500-2000)">Moderate (Rs 500-2000)</option>
+                                <option value="Premium (Rs 2000-5000)">Premium (Rs 2000-5000)</option>
+                                <option value="Luxury (Rs 5000+)">Luxury (Rs 5000+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Images -->
+                    <div class="form-section">
+                        <h3>Images</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Banner Image *</label>
+                            <input type="file" class="form-control" id="business-banner" accept="image/*" onchange="previewBanner(this)">
+                            <small class="text-secondary">Recommended size: 1200x400px</small>
+                            <div class="image-preview" id="banner-preview"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Logo *</label>
+                            <input type="file" class="form-control" id="business-logo" accept="image/*" onchange="previewLogo(this)">
+                            <small class="text-secondary">Recommended size: 200x200px</small>
+                            <div class="image-preview" id="logo-preview"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Gallery Images</label>
+                            <input type="file" class="form-control" id="business-gallery" accept="image/*" multiple onchange="previewGallery(this)">
+                            <small class="text-secondary">Upload up to 10 images</small>
+                            <div class="gallery-preview" id="gallery-preview"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Location -->
+                    <div class="form-section">
+                        <h3>Location</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Address *</label>
+                            <input type="text" class="form-control" id="business-address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">City *</label>
+                            <select class="form-control" id="business-city" required>
+                                <option value="">Select City</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Latitude</label>
+                                <input type="text" class="form-control" id="business-latitude" placeholder="27.7172">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Longitude</label>
+                                <input type="text" class="form-control" id="business-longitude" placeholder="85.3240">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline btn-sm" onclick="getCurrentLocation()">
+                            📍 Use Current Location
+                        </button>
+                    </div>
+                    
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone *</label>
+                            <input type="tel" class="form-control" id="business-phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="business-email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Website</label>
+                            <input type="url" class="form-control" id="business-website" placeholder="https://">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Facebook</label>
+                            <input type="url" class="form-control" id="business-facebook" placeholder="https://facebook.com/">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Instagram</label>
+                            <input type="url" class="form-control" id="business-instagram" placeholder="https://instagram.com/">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">WhatsApp</label>
+                            <input type="tel" class="form-control" id="business-whatsapp" placeholder="+977">
+                        </div>
+                    </div>
+                    
+                    <!-- Services -->
+                    <div class="form-section">
+                        <h3>Services</h3>
+                        <p class="text-secondary mb-3">Add services your business offers</p>
+                        
+                        <div id="services-container">
+                            <div class="service-item">
+                                <div class="form-row">
+                                    <div class="form-group" style="flex: 2;">
+                                        <input type="text" class="form-control" placeholder="Service Name" name="service-name[]">
+                                    </div>
+                                    <div class="form-group" style="flex: 1;">
+                                        <input type="text" class="form-control" placeholder="Price" name="service-price[]">
+                                    </div>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeService(this)">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-outline btn-sm" onclick="addService()">+ Add Service</button>
+                    </div>
+                    
+                    <!-- Tags -->
+                    <div class="form-section">
+                        <h3>Tags</h3>
+                        <div class="form-group">
+                            <label class="form-label">Add Tags</label>
+                            <input type="text" class="form-control" id="business-tags" placeholder="e.g., pizza, italian, delivery">
+                            <small class="text-secondary">Separate tags with commas</small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="backToSelection()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Business Profile</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Professional Profile Form -->
+            <div class="profile-form-container hidden" id="professional-form-container">
+                <div class="form-header">
+                    <button class="btn btn-outline btn-sm" onclick="backToSelection()">← Back</button>
+                    <h2>Create Professional Profile</h2>
+                </div>
+                
+                <form id="professional-form" onsubmit="handleProfessionalSubmit(event)">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h3>Basic Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" class="form-control" id="professional-name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Category *</label>
+                            <select class="form-control" id="professional-category" required>
+                                <option value="">Select Category</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="consultant">Consultant</option>
+                                <option value="therapist">Therapist</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Specialization *</label>
+                            <input type="text" class="form-control" id="professional-specialization" required placeholder="e.g., Cardiologist, Dermatologist">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Description *</label>
+                            <textarea class="form-control" id="professional-description" rows="4" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Qualification</label>
+                            <input type="text" class="form-control" id="professional-qualification" placeholder="e.g., MBBS, MD">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Years of Experience</label>
+                            <input type="number" class="form-control" id="professional-experience" min="0">
+                        </div>
+                    </div>
+                    
+                    <!-- Photo -->
+                    <div class="form-section">
+                        <h3>Photo</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Professional Photo *</label>
+                            <input type="file" class="form-control" id="professional-photo" accept="image/*" required onchange="previewProfessionalPhoto(this)">
+                            <small class="text-secondary">Recommended size: 400x400px</small>
+                            <div class="image-preview" id="professional-photo-preview"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Clinic/Office Details -->
+                    <div class="form-section">
+                        <h3>Clinic/Office Details</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Clinic/Office Name</label>
+                            <input type="text" class="form-control" id="professional-clinic-name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Address *</label>
+                            <input type="text" class="form-control" id="professional-address" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">City *</label>
+                            <select class="form-control" id="professional-city" required>
+                                <option value="">Select City</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Consultation Fee</label>
+                            <input type="text" class="form-control" id="professional-fee" placeholder="e.g., Rs 1000">
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Phone *</label>
+                            <input type="tel" class="form-control" id="professional-phone" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="professional-email">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" onclick="backToSelection()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create Professional Profile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- Scripts -->
+    <script src="/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/supabase-client.js"></script>
+    <script src="/js/create-profile.js"></script>
+    
+    <script>
+        // Load header and footer
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

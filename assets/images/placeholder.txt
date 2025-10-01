@@ -1,0 +1,31 @@
+# Placeholder for Images
+
+Please add the following images to this directory:
+
+1. **MeroProfile-Logo.png** (Required)
+   - Your company logo
+   - Recommended size: 200x50px
+   - Format: PNG with transparent background
+
+2. **favicon.png** (Required)
+   - Website favicon
+   - Size: 32x32px or 64x64px
+   - Format: PNG
+
+3. **og-image.jpg** (Required)
+   - Open Graph image for social media sharing
+   - Size: 1200x630px
+   - Format: JPG or PNG
+
+## Temporary Solution
+
+Until you add your own images, you can:
+- Use text-based logo in the header
+- Use a simple colored square as favicon
+- Use a generic image for OG tags
+
+## Where These Images Are Used
+
+- **Logo**: Header navigation, footer
+- **Favicon**: Browser tab icon
+- **OG Image**: When sharing links on Facebook, Twitter, etc.

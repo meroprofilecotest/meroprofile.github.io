@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover and connect with businesses, professionals, and services in Nepal. Find restaurants, doctors, clinics, salons, and more on MeroProfile.">
+    <meta name="keywords" content="Nepal business directory, find services Nepal, restaurants Nepal, doctors Nepal, business listings">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://meroprofile.com/">
+    <meta property="og:title" content="MeroProfile - Discover Businesses & Services in Nepal">
+    <meta property="og:description" content="Your trusted platform for finding the best local businesses and services across Nepal.">
+    <meta property="og:image" content="/assets/images/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://meroprofile.com/">
+    <meta property="twitter:title" content="MeroProfile - Discover Businesses & Services in Nepal">
+    <meta property="twitter:description" content="Your trusted platform for finding the best local businesses and services across Nepal.">
+    <meta property="twitter:image" content="/assets/images/og-image.jpg">
+    
+    <title>MeroProfile - Discover Businesses & Services in Nepal</title>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover the Best Businesses & Services in Nepal</h1>
+                <p class="hero-subtitle">Connect with trusted professionals, restaurants, clinics, and more across Nepal</p>
+                
+                <div class="hero-search">
+                    <form class="hero-search-form" onsubmit="handleHeroSearch(event)">
+                        <input 
+                            type="text" 
+                            id="hero-search-input" 
+                            class="hero-search-input" 
+                            placeholder="What are you looking for?"
+                        >
+                        <select id="hero-category" class="hero-category-select">
+                            <option value="">All Categories</option>
+                        </select>
+                        <select id="hero-city" class="hero-city-select">
+                            <option value="">All Cities</option>
+                        </select>
+                        <button type="submit" class="hero-search-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            Search
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-businesses">0</span>
+                        <span class="stat-label">Businesses</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-categories">16</span>
+                        <span class="stat-label">Categories</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-cities">15</span>
+                        <span class="stat-label">Cities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Featured Profiles Section -->
+    <section class="section featured-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Profiles</h2>
+                <p class="text-secondary">Premium businesses and professionals</p>
+            </div>
+            <div id="featured-profiles" class="grid grid-3">
+                <!-- Featured profiles will be loaded here -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="/pages/featured.html" class="btn btn-outline">View All Featured</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Categories Section -->
+    <section class="section categories-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse by Category</h2>
+                <p class="text-secondary">Find what you're looking for</p>
+            </div>
+            <div id="categories-grid" class="categories-grid">
+                <!-- Categories will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recently Registered Section -->
+    <section class="section recent-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Recently Registered</h2>
+                <p class="text-secondary">New businesses on MeroProfile</p>
+            </div>
+            <div id="recent-businesses" class="grid grid-3">
+                <!-- Recent businesses will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Popular Services Section -->
+    <section class="section popular-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Services</h2>
+                <p class="text-secondary">Most searched services</p>
+            </div>
+            <div id="popular-services" class="popular-tags">
+                <!-- Popular tags will be loaded here -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Grow Your Business?</h2>
+                <p>Join thousands of businesses already on MeroProfile</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='/pages/create-profile.html'">
+                        Create Your Profile
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="window.location.href='/pages/pricing.html'">
+                        View Pricing
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- Scripts -->
+    <script src="/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/supabase-client.js"></script>
+    <script src="/js/homepage.js"></script>
+    
+    <script>
+        // Load header and footer
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

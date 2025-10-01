@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - MeroProfile</title>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/search.css">
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+    
+    <main class="main-content">
+        <div class="container">
+            <!-- Search Filters -->
+            <div class="search-filters">
+                <div class="filter-group">
+                    <input type="text" id="search-query" class="form-control" placeholder="Search...">
+                </div>
+                <div class="filter-group">
+                    <select id="filter-category" class="form-control">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-city" class="form-control">
+                        <option value="">All Cities</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select id="filter-price" class="form-control">
+                        <option value="">All Prices</option>
+                        <option value="Budget (Rs 0-500)">Budget</option>
+                        <option value="Moderate (Rs 500-2000)">Moderate</option>
+                        <option value="Premium (Rs 2000-5000)">Premium</option>
+                        <option value="Luxury (Rs 5000+)">Luxury</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="performSearch()">Search</button>
+            </div>
+            
+            <!-- Results Header -->
+            <div class="results-header">
+                <h2 id="results-title">Search Results</h2>
+                <p id="results-count" class="text-secondary"></p>
+            </div>
+            
+            <!-- Results Grid -->
+            <div id="results-container" class="grid grid-3">
+                <!-- Results will be loaded here -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    
+    <!-- Scripts -->
+    <script src="/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/supabase-client.js"></script>
+    <script src="/js/search.js"></script>
+    
+    <script>
+        // Load header and footer
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+        
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+.
+├── assets
+│   ├── icons
+│   └── images
+│       └── placeholder.txt
+├── components
+│   ├── footer.html
+│   └── header.html
+├── css
+│   ├── create-profile.css
+│   ├── homepage.css
+│   ├── search.css
+│   └── styles.css
+├── js
+│   ├── create-profile.js
+│   ├── homepage.js
+│   ├── search.js
+│   ├── supabase-client.js
+│   └── utils.js
+├── outputs
+│   ├── workspace_output_1759306435_6125.txt
+│   ├── workspace_output_1759307042_9423.txt
+│   └── workspace_output_1759307298_7619.txt
+├── pages
+│   ├── create-profile.html
+│   └── search.html
+├── CHECKLIST.md
+├── DELIVERY_SUMMARY.md
+├── DEPLOYMENT.md
+├── FILE_INDEX.md
+├── PROJECT_SUMMARY.md
+├── QUICK_START.md
+├── README.md
+├── SETUP_INSTRUCTIONS.md
+├── config.js
+├── generate-logo.html
+├── index.html
+├── package.json
+├── supabase-schema.sql
+└── todo.md
+
+9 directories, 31 files

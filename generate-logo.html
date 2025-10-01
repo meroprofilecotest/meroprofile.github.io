@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate MeroProfile Logo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 600px;
+        }
+        h1 {
+            color: #2563eb;
+            margin-bottom: 2rem;
+        }
+        .logo-preview {
+            background: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            border: 2px solid #e5e7eb;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .instructions {
+            text-align: left;
+            background: #f9fafb;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #2563eb;
+        }
+        .instructions ol {
+            padding-left: 1.5rem;
+        }
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .canvas-container {
+            display: none;
+        }
+    </style>
+<script src="https://sites.super.myninja.ai/_assets/ninja-daytona-script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>MeroProfile Logo Generator</h1>
+        <p>Generate a temporary logo for your MeroProfile website</p>
+        
+        <div class="logo-preview">
+            <div class="logo">MeroProfile</div>
+        </div>
+        
+        <button onclick="generateLogo()">Download Logo (200x50px)</button>
+        <button onclick="generateFavicon()">Download Favicon (64x64px)</button>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Click the buttons above to download temporary logo files</li>
+                <li>Save them to <code>assets/images/</code> directory:
+                    <ul>
+                        <li><code>MeroProfile-Logo.png</code></li>
+                        <li><code>favicon.png</code></li>
+                    </ul>
+                </li>
+                <li>These are temporary - replace with your professional logo later</li>
+                <li>For OG image, use any 1200x630px image or create one at <a href="https://www.canva.com" target="_blank">Canva</a></li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="canvas-container">
+        <canvas id="logo-canvas"></canvas>
+        <canvas id="favicon-canvas"></canvas>
+    </div>
+    
+    <script>
+        function generateLogo() {
+            const canvas = document.getElementById('logo-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = 200;
+            canvas.height = 50;
+            
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 200, 0);
+            gradient.addColorStop(0, '#2563eb');
+            gradient.addColorStop(1, '#7c3aed');
+            
+            // Draw text
+            ctx.fillStyle = gradient;
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('MeroProfile', 100, 25);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = 'MeroProfile-Logo.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        function generateFavicon() {
+            const canvas = document.getElementById('favicon-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            canvas.width = 64;
+            canvas.height = 64;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, 64, 64);
+            gradient.addColorStop(0, '#2563eb');
+            gradient.addColorStop(1, '#7c3aed');
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 64, 64);
+            
+            // Draw letter M
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 40px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('M', 32, 32);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = 'favicon.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
